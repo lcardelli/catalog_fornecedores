@@ -25,6 +25,14 @@ func Setup(router *gin.Engine) {
 		api.PUT("/suppliers/:id", middleware.AuthMiddleware(), controllers.UpdateSupplier)  // Atualizar fornecedor
 		api.DELETE("/suppliers/:id", middleware.AuthMiddleware(), controllers.DeleteSupplier) // Deletar fornecedor
 	}
+
+
+	auth := router.Group("/auth")
+	{
+		auth.GET("/google/login", controllers.HandleGoogleLogin)       // Iniciar login com Google
+		auth.GET("/google/callback", controllers.HandleGoogleCallback) // Callback do Google
+	}
 }
+
 
 
